@@ -1,0 +1,1 @@
+# freelens-trivy-operator-extension
