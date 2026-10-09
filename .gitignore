@@ -6,6 +6,10 @@ build/output/
 *.tgz
 *.tsbuildinfo
 coverage/
+.turbo/
+.nyc_output/
+*.log
+*.map
 
 # Environment and secrets
 .env
