@@ -49,12 +49,20 @@ jobs:
           node tools/release-notes.mjs "$TAG" > release-notes.md
           cat SHA256SUMS
 
-      # Only a pushed tag creates the release, so a manual run on a tag that already has one is safe.
+      # Only a pushed tag creates the release. If the tag was moved and its release already exists, the files
+      # are replaced instead, so re-tagging a commit (a rewritten history, say) cannot fail the run.
       - name: Publish the release
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$TAG" ./*.tgz SHA256SUMS --verify-tag --title "$TAG" --notes-file release-notes.md
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" ./*.tgz SHA256SUMS --clobber
+            gh release edit "$TAG" --notes-file release-notes.md
+            echo "updated the existing $TAG release"
+          else
+            gh release create "$TAG" ./*.tgz SHA256SUMS --verify-tag --title "$TAG" --notes-file release-notes.md
+          fi
 
       - name: Keep the files of a rehearsal
         if: github.event_name == 'workflow_dispatch'
