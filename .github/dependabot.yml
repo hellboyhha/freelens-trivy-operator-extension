@@ -1,32 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
-    commit-message:
-      prefix: "chore(deps)"
-    # Freelens provides these at runtime; the extension must build against the
-    # same major version as the host, so major bumps are done by hand.
-    ignore:
-      - dependency-name: react
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-      - dependency-name: react-dom
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-      - dependency-name: "@types/react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "@testing-library/react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: mobx
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-      - dependency-name: mobx-react
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "@freelensapp/extensions"
-        update-types: ["version-update:semver-major"]
-    groups:
-      dev-tooling:
-        patterns: ["*"]
+  # Only the GitHub Actions ecosystem is listed.
+  #
+  # Dependabot cannot complete an npm update in this project: its pnpm updater reports `unknown_error`
+  # for every declared devDependency, and `security_update_not_possible` for the transitive ones, which
+  # it never resolves past the version already in the lockfile. Leaving the npm entry in only produces a
+  # failing run every week.
+  #
+  # Dependabot alerts stay on as the signal. npm updates are done by hand: `pnpm up` for the direct
+  # dependencies, and `pnpm-workspace.yaml` overrides for the transitive packages that upstream ranges
+  # will not move.
+  #
+  # If npm updates are ever re-enabled here, react, react-dom and mobx must keep their major bumps
+  # ignored (react and mobx their minor bumps too): Freelens provides them at runtime, so the extension
+  # has to build against the same version as the host.
   - package-ecosystem: github-actions
     directory: /
     schedule:
