@@ -5,7 +5,7 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-## [0.1.1] - 10 October 2026
+## [0.1.2] - 10 October 2026
 
 ### Fixed
 
