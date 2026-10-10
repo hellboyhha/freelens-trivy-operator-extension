@@ -5,11 +5,13 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.1] - 10 October 2026
+
 ### Fixed
 
 - The Export menu no longer pushes the page down when it opens. It is positioned over the list again.
 
-## [0.1.0] - Unreleased
+## [0.1.0] - 10 October 2026
 
 First release.
 
