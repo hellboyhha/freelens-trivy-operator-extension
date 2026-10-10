@@ -1,0 +1,344 @@
+@use "../vars" as *;
+
+// Shared building blocks. Colours are theme variables; spacing is the 8px grid of vars.
+
+.bar {
+  display: flex;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--textColorSecondary) 14%, transparent);
+
+  > i {
+    display: block;
+    height: 100%;
+  }
+}
+
+.segCritical {
+  background: var(--colorError);
+}
+
+.segHigh {
+  background: var(--colorWarning);
+}
+
+.segMedium {
+  background: color-mix(in srgb, var(--colorWarning) 40%, var(--textColorSecondary));
+}
+
+.segLow {
+  background: color-mix(in srgb, var(--textColorSecondary) 55%, transparent);
+}
+
+.segOk {
+  background: var(--colorOk, #4caf50);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc($unit * 1.5);
+  margin-top: $unit;
+  color: var(--textColorSecondary);
+  font-size: 0.9em;
+
+  b {
+    color: var(--textColorPrimary);
+    font-weight: 600;
+  }
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $unit;
+  margin: $unit 0;
+}
+
+// Chips and the scope switch share one height and one pill shape, so a toolbar row looks like one piece.
+$control-height: 30px;
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: $control-height;
+  padding: 0 14px;
+  border: 1px solid var(--borderColor);
+  border-radius: calc($control-height / 2);
+  background: transparent;
+  color: var(--textColorSecondary);
+  cursor: pointer;
+  font: inherit;
+
+  &:hover {
+    color: var(--textColorPrimary);
+  }
+}
+
+.chipOn {
+  border-color: var(--textColorAccent);
+  background: color-mix(in srgb, var(--textColorAccent) 16%, transparent);
+  color: var(--textColorPrimary);
+}
+
+.banner {
+  display: flex;
+  gap: calc($unit * 1.5);
+  align-items: flex-start;
+  margin: 0;
+  padding: calc($unit * 1.4) calc($unit * 1.8);
+  border: 1px solid color-mix(in srgb, var(--colorWarning) 40%, transparent);
+  border-radius: $unit;
+  background: color-mix(in srgb, var(--colorWarning) 10%, transparent);
+  line-height: 1.5;
+}
+
+.bannerInfo {
+  border-color: color-mix(in srgb, var(--colorInfo) 40%, transparent);
+  background: color-mix(in srgb, var(--colorInfo) 9%, transparent);
+}
+
+.segmented {
+  display: inline-flex;
+  overflow: hidden;
+  height: $control-height;
+  border: 1px solid var(--borderColor);
+  border-radius: calc($control-height / 2);
+}
+
+.segmentedItem {
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: var(--textColorSecondary);
+  cursor: pointer;
+  font: inherit;
+}
+
+.segmentedOn {
+  background: color-mix(in srgb, var(--textColorAccent) 22%, transparent);
+  color: var(--textColorPrimary);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.tab {
+  margin-bottom: -1px;
+  padding: calc($unit * 1.1) calc($unit * 2);
+
+  // The first label lines up with the left edge of everything below it.
+  &:first-child {
+    padding-left: 0;
+  }
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--textColorSecondary);
+  cursor: pointer;
+  font: inherit;
+}
+
+.tabOn {
+  border-color: var(--textColorAccent);
+  color: var(--textColorPrimary);
+  font-weight: 600;
+}
+
+.empty {
+  max-width: 520px;
+  margin: calc($unit * 8) auto 0;
+  text-align: center;
+  color: var(--textColorSecondary);
+  line-height: 1.55;
+
+  h5 {
+    margin: 0 0 calc($unit * 1.5);
+    color: var(--textColorPrimary);
+    font-size: 1.15em;
+    font-weight: 600;
+  }
+}
+
+.emptyIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: calc($unit * 2.5);
+}
+
+// One gap between paragraphs and blocks, whatever the host's reset does to <p>.
+.emptyBody {
+  display: flex;
+  flex-direction: column;
+  gap: calc($unit * 1.5);
+
+  p {
+    margin: 0;
+  }
+}
+
+.emptyActions {
+  display: flex;
+  justify-content: center;
+  margin-top: calc($unit * 3);
+}
+
+.code {
+  display: block;
+  margin: calc($unit * 1.5) 0;
+  padding: calc($unit * 1.2) calc($unit * 1.5);
+  border: 1px solid var(--borderColor);
+  border-radius: 6px;
+  background: var(--contentColor);
+  font-family: var(--font-monospace, monospace);
+  font-size: 0.9em;
+  text-align: left;
+  user-select: text;
+  white-space: pre-wrap;
+}
+
+.button {
+  padding: 7px 18px;
+  border: 1px solid var(--borderColor);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--textColorPrimary);
+  cursor: pointer;
+  font: inherit;
+
+  &:hover {
+    border-color: var(--textColorAccent);
+  }
+}
+
+.buttonPrimary {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+
+  &:hover {
+    border-color: var(--primary);
+    filter: brightness(1.1);
+  }
+}
+
+.two {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 2px 0;
+
+  b {
+    overflow: hidden;
+    font-weight: 600;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  span {
+    overflow: hidden;
+    color: var(--textColorTertiary);
+    font-size: 0.88em;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.image {
+  font-family: var(--font-monospace, monospace);
+  font-size: 0.9em;
+
+  em {
+    color: var(--textColorAccent);
+    font-style: normal;
+  }
+}
+
+.fixable {
+  color: var(--colorOk, #4caf50);
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--textColorTertiary);
+}
+
+.skeleton {
+  height: 96px;
+  border-radius: $unit;
+  background: color-mix(in srgb, var(--textColorSecondary) 10%, transparent);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// The severity cell of a list row: bar on the left, four right-aligned numbers beside it.
+.sevCell {
+  display: flex;
+  align-items: center;
+  gap: calc($unit * 1.5);
+  min-width: 0;
+
+  .bar {
+    flex: none;
+    width: 140px;
+    height: 7px;
+  }
+}
+
+.sevNumbers {
+  display: inline-flex;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+// Fixed-width digits so the four columns of numbers line up from row to row.
+.sevNum {
+  min-width: 3ch;
+  color: var(--textColorSecondary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.sevNum_critical {
+  color: var(--colorError);
+  font-weight: 600;
+}
+
+.sevNum_high {
+  color: var(--colorWarning);
+  font-weight: 600;
+}
+
+.sevZero {
+  color: var(--textColorTertiary);
+  opacity: 0.55;
+}
+
+// Findings the scanner could not rate: counted, but not part of the four columns.
+.sevUnknown {
+  color: var(--textColorTertiary);
+  font-size: 0.9em;
+}

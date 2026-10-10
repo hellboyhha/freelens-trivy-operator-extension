@@ -1,0 +1,42 @@
+{
+  "apiVersion": "aquasecurity.github.io/v1alpha1",
+  "kind": "InfraAssessmentReport",
+  "metadata": {
+    "name": "pod-kube-apiserver-demo",
+    "labels": {
+      "app.kubernetes.io/managed-by": "trivy-operator",
+      "trivy-operator.resource.kind": "Pod",
+      "trivy-operator.resource.name": "kube-apiserver-demo",
+      "trivy-operator.resource.namespace": "kube-system"
+    },
+    "creationTimestamp": "2026-01-15T10:00:00Z",
+    "uid": "00000000-0000-4000-8000-000000000001",
+    "resourceVersion": "1",
+    "namespace": "kube-system",
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "Pod",
+        "name": "kube-apiserver-demo",
+        "uid": "00000000-0000-4000-8000-000000000002",
+        "controller": true,
+        "blockOwnerDeletion": false
+      }
+    ]
+  },
+  "report": {
+    "scanner": {
+      "name": "Trivy",
+      "vendor": "Aqua Security",
+      "version": "0.60.0"
+    },
+    "summary": {
+      "criticalCount": 0,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0
+    },
+    "updateTimestamp": "2026-01-15T10:00:00Z",
+    "checks": []
+  }
+}

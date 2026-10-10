@@ -1,0 +1,21 @@
+declare const classNames: {
+  readonly page: "page";
+  readonly cards: "cards";
+  readonly card: "card";
+  readonly cardOn: "cardOn";
+  readonly cardTitle: "cardTitle";
+  readonly cardFailing: "cardFailing";
+  readonly cardUnit: "cardUnit";
+  readonly cardMeta: "cardMeta";
+  readonly tools: "tools";
+  readonly search: "search";
+  readonly table: "table";
+  readonly tableCell: "tableCell";
+  readonly id: "id";
+  readonly name: "name";
+  readonly severity: "severity";
+  readonly count: "count";
+  readonly title: "title";
+  readonly updated: "updated";
+};
+export = classNames;

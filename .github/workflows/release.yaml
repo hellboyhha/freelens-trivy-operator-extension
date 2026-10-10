@@ -1,0 +1,68 @@
+name: release
+
+# A tag like v0.1.0 builds the extension and publishes a GitHub release with the .tgz and its checksum.
+# Run by hand (workflow_dispatch) it rehearses that without publishing anything.
+# Publishing to npm is done by hand by a maintainer, not from here; CONTRIBUTING.md has the steps.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: The tag, package.json and CHANGELOG.md agree
+        env:
+          REF_NAME: ${{ github.ref_name }}
+          IS_TAG: ${{ startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          if [ "$IS_TAG" = "true" ]; then TAG="$REF_NAME"; else TAG="v$(node -p "require('./package.json').version")"; fi
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          node tools/release-notes.mjs --check "$TAG"
+
+      - run: pnpm check
+      - run: pnpm pack:dev
+      - name: Checksum and release notes
+        run: |
+          sha256sum ./*.tgz > SHA256SUMS
+          node tools/release-notes.mjs "$TAG" > release-notes.md
+          cat SHA256SUMS
+
+      # Only a pushed tag creates the release, so a manual run on a tag that already has one is safe.
+      - name: Publish the release
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$TAG" ./*.tgz SHA256SUMS --verify-tag --title "$TAG" --notes-file release-notes.md
+
+      - name: Keep the files of a rehearsal
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-rehearsal
+          path: |
+            *.tgz
+            SHA256SUMS
+            release-notes.md
+          retention-days: 3

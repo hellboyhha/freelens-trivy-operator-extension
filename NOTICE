@@ -1,0 +1,14 @@
+This project is based on the Freelens example extension
+(https://github.com/freelensapp/freelens-example-extension, tag v1.10.2),
+which is distributed under the MIT License:
+
+    Copyright (c) 2025-2026 Freelens Authors.
+
+The original copyright notice and permission notice are retained for the
+portions derived from that work.
+
+The sidebar icon is the cube of the Trivy logo from
+https://github.com/aquasecurity/trivy (docs/imgs/logo-horizontal.svg), Copyright
+Aqua Security Software Ltd., distributed with Trivy under the Apache License 2.0. It
+identifies the product this extension reads. This project is not affiliated with or
+endorsed by Aqua Security.

@@ -1,0 +1,18 @@
+{
+  "entry": [
+    "src/main/index.ts",
+    "src/renderer/index.tsx",
+    "src/**/*.test.{ts,tsx}",
+    "tools/*.mjs",
+    "tools/**/*.test.mjs",
+    "electron.vite.config.js"
+  ],
+  "project": ["src/**/*.{ts,tsx}", "tools/**/*.mjs", "test/**/*.ts", "build/**/*.js"],
+  "ignore": ["src/**/*.d.scss.ts"],
+  "ignoreDependencies": [
+    // loaded by name from electron.vite.config.js
+    "@babel/plugin-proposal-decorators"
+  ],
+  // its config loader fails on this repo's ESM config; test files are listed as entries above
+  "vitest": false
+}

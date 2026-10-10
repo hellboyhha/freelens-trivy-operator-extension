@@ -1,0 +1,245 @@
+@use "../vars" as *;
+
+.table {
+  margin: $unit 0 calc($unit * 2);
+
+  :global(.TableCell) {
+    &.severity {
+      flex-grow: 0.7;
+    }
+
+    &.id {
+      flex-grow: 1;
+    }
+
+    &.package {
+      flex-grow: 1.2;
+    }
+
+    &.version {
+      flex-grow: 0.9;
+    }
+
+    &.title {
+      flex-grow: 2.5;
+    }
+
+    &.count {
+      flex-grow: 0.4;
+    }
+
+    &.name {
+      flex-grow: 1.6;
+    }
+  }
+}
+
+.mono {
+  font-family: var(--font-monospace, monospace);
+  user-select: text;
+  word-break: break-all;
+}
+
+.summary {
+  margin: $unit 0 calc($unit * 2);
+  padding: calc($unit * 1.75) calc($unit * 2);
+  border: 1px solid var(--borderColor);
+  border-radius: $unit;
+  background: var(--contentColor);
+}
+
+.big {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc($unit * 3);
+  margin-bottom: calc($unit * 1.25);
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  b {
+    font-size: 1.6em;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  span {
+    color: var(--textColorSecondary);
+    font-size: 0.85em;
+  }
+}
+
+.bigRight {
+  margin-left: auto;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $unit calc($unit * 2);
+  margin: $unit 0;
+}
+
+.toolsRight {
+  margin-left: auto;
+}
+
+.search {
+  flex: 1 1 160px;
+  min-width: 120px;
+  padding: calc($unit / 2) $unit;
+  border: 1px solid var(--borderColor);
+  border-radius: calc($unit / 2);
+  background: transparent;
+  color: var(--textColorPrimary);
+}
+
+.more {
+  margin: 0 0 calc($unit * 2);
+  color: var(--textColorSecondary);
+}
+
+.moreButton {
+  margin-left: $unit;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--textColorAccent);
+  cursor: pointer;
+  font: inherit;
+}
+
+.package {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: $unit;
+  padding: calc($unit * 1.4) calc($unit * 1.75);
+  border: 1px solid var(--borderColor);
+  border-radius: $unit;
+  background: var(--contentColor);
+}
+
+.packageHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: $unit calc($unit * 1.25);
+
+  b {
+    font-weight: 600;
+  }
+}
+
+.versions {
+  color: var(--textColorTertiary);
+  font-family: var(--font-monospace, monospace);
+  font-size: 0.9em;
+}
+
+.clears {
+  margin-left: auto;
+  color: var(--colorOk, #4caf50);
+  font-weight: 600;
+}
+
+.nofix {
+  margin-left: auto;
+  color: var(--textColorTertiary);
+}
+
+.cves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.85em;
+
+  a,
+  span {
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--textColorSecondary) 12%, transparent);
+    color: var(--textColorSecondary);
+    font-family: var(--font-monospace, monospace);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--textColorPrimary);
+  }
+}
+
+.check {
+  margin-bottom: $unit;
+  padding: $unit calc($unit * 1.5);
+  border: 1px solid var(--borderColor);
+  border-radius: $unit;
+  background: var(--contentColor);
+
+  summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: $unit calc($unit * 1.25);
+    cursor: pointer;
+  }
+}
+
+.checkTitle {
+  font-weight: 600;
+}
+
+.checkBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: $unit;
+  color: var(--textColorSecondary);
+  line-height: 1.45;
+}
+
+.fixLine {
+  color: var(--textColorPrimary);
+}
+
+.counts {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: calc($unit * 1.5);
+}
+
+.wcard {
+  margin-bottom: $unit;
+  padding: calc($unit * 1.4) calc($unit * 1.75);
+  border: 1px solid var(--borderColor);
+  border-radius: $unit;
+  background: var(--contentColor);
+}
+
+.wcardMissing {
+  border-style: dashed;
+}
+
+.wtitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: $unit calc($unit * 1.25);
+  margin-bottom: 6px;
+
+  a:last-child {
+    margin-left: auto;
+  }
+}
+
+.wrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc($unit * 2);
+  margin-top: 6px;
+  color: var(--textColorSecondary);
+  font-size: 0.95em;
+}

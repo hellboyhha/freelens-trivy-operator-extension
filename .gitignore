@@ -1,0 +1,42 @@
+# Dependencies and build output
+node_modules/
+out/
+dist/
+build/output/
+*.tgz
+*.tsbuildinfo
+coverage/
+.turbo/
+.nyc_output/
+*.log
+*.map
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+*.key
+kubeconfig*
+*.kubeconfig
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Agent / AI-assistant files (local only, never committed)
+AGENTS.md
+AGENT.md
+CLAUDE.md
+GEMINI.md
+.agents/
+.claude/
+.codex/
+.cursor/
+.cursorrules
+.windsurf/
+.aider*
+.hermes/
+.harness-local/
+.github/copilot-instructions.md

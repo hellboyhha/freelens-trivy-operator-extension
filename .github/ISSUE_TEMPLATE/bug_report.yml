@@ -1,0 +1,48 @@
+name: Bug report
+description: Something does not work or looks wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: input
+    id: extension
+    attributes:
+      label: Extension version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: freelens
+    attributes:
+      label: Freelens version
+      placeholder: "1.10.3"
+    validations:
+      required: true
+  - type: input
+    id: operator
+    attributes:
+      label: Trivy Operator version
+      description: The image tag of the operator, for example from its Deployment.
+      placeholder: "0.37.0"
+  - type: input
+    id: kubernetes
+    attributes:
+      label: Kubernetes version
+      placeholder: "1.35"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Errors or screenshots
+      description: The Freelens developer console (View > Toggle Developer Tools) often has the error.
+  - type: checkboxes
+    id: clean
+    attributes:
+      label: Before you submit
+      options:
+        - label: I removed cluster names, hostnames, registry addresses and secrets from everything I pasted.
+          required: true

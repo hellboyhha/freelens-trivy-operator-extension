@@ -1,0 +1,95 @@
+{
+  "name": "@hellboyhha/freelens-trivy-operator-extension",
+  "version": "0.1.0",
+  "description": "Freelens extension for Trivy Operator: vulnerability, config audit, exposed secret, RBAC, SBOM and compliance reports",
+  "homepage": "https://github.com/hellboyhha/freelens-trivy-operator-extension#readme",
+  "bugs": {
+    "url": "https://github.com/hellboyhha/freelens-trivy-operator-extension/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellboyhha/freelens-trivy-operator-extension.git",
+    "directory": "."
+  },
+  "main": "out/main/index.js",
+  "renderer": "out/renderer/index.js",
+  "files": [
+    "out/**/*",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">= 22.0.0",
+    "freelens": "^1.10.0"
+  },
+  "copyright": "\u00a9 2026 hellboyhha",
+  "license": "MIT",
+  "author": {
+    "name": "hellboyhha"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "biome": "biome",
+    "biome:check": "biome check",
+    "biome:fix": "biome check --fix",
+    "biome:migrate": "biome migrate --write",
+    "lint": "pnpm biome:check",
+    "lint:fix": "pnpm biome:fix",
+    "type:check": "tsc --noEmit -p tsconfig.json --composite false",
+    "test": "vitest run",
+    "knip": "knip --dependencies --no-gitignore",
+    "check": "node tools/check.mjs",
+    "check:fast": "node tools/check.mjs --fast",
+    "check:arch": "node tools/architecture.mjs",
+    "check:leaks": "node tools/leaks.mjs",
+    "check:pack": "node tools/pack.mjs",
+    "hooks:install": "lefthook install",
+    "prebuild": "pnpm type:check",
+    "build": "electron-vite build",
+    "build:production": "VITE_PRESERVE_MODULES=false electron-vite build",
+    "pack:dev": "pnpm build && pnpm clean:tgz && pnpm pack && shx ls \"$PWD\"/*.tgz",
+    "clean": "pnpm clean:out",
+    "clean:node_modules": "shx rm -rf node_modules",
+    "clean:out": "shx rm -rf out",
+    "clean:tgz": "shx rm -f \"*.tgz\"",
+    "clean:all": "pnpm \"/^clean:(node_modules|out|tgz)\\$/\""
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^8.0.2",
+    "@biomejs/biome": "2.5.1",
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@freelensapp/extensions": "^1.10.2",
+    "@testing-library/react": "^12.1.5",
+    "@types/node": "~24.12.4",
+    "@types/react": "^17.0.93",
+    "@vitejs/plugin-react": "^6.0.3",
+    "electron-vite": "^5.0.0",
+    "jsdom": "^29.1.1",
+    "knip": "6.23.0",
+    "lefthook": "2.2.1",
+    "mobx": "6.13.7",
+    "mobx-react": "7.6.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.101.0",
+    "shx": "0.4.0",
+    "typescript": "5.9.3",
+    "vite": "^8.1.2",
+    "vite-plugin-sass-dts": "^1.3.37",
+    "vitest": "^4.1.9"
+  },
+  "keywords": [
+    "freelens",
+    "freelensapp",
+    "extension",
+    "kubernetes",
+    "trivy",
+    "trivy-operator",
+    "security",
+    "vulnerability",
+    "sbom"
+  ],
+  "packageManager": "pnpm@10.34.4"
+}

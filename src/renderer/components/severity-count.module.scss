@@ -1,0 +1,38 @@
+// Severity colours come from the Freelens theme so they follow light and dark mode.
+.pill {
+  display: inline-block;
+  min-width: 26px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.zero {
+  color: var(--textColorTertiary);
+  font-weight: 400;
+}
+
+.critical {
+  background: color-mix(in srgb, var(--colorError) 20%, transparent);
+  color: var(--colorError);
+}
+
+.high {
+  background: color-mix(in srgb, var(--colorWarning) 20%, transparent);
+  color: var(--colorWarning);
+}
+
+.medium {
+  background: color-mix(in srgb, var(--colorInfo) 20%, transparent);
+  color: var(--colorInfo);
+}
+
+.low,
+.unknown {
+  background: color-mix(in srgb, var(--textColorSecondary) 16%, transparent);
+  color: var(--textColorSecondary);
+}

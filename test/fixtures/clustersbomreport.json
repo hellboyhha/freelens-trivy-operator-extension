@@ -1,0 +1,65 @@
+{
+  "apiVersion": "aquasecurity.github.io/v1alpha1",
+  "kind": "ClusterSbomReport",
+  "metadata": {
+    "name": "replicaset-web-5d8f7c9b6-web",
+    "labels": {
+      "app.kubernetes.io/managed-by": "trivy-operator",
+      "trivy-operator.resource.kind": "ReplicaSet",
+      "trivy-operator.resource.name": "web-5d8f7c9b6",
+      "trivy-operator.resource.namespace": "",
+      "trivy-operator.container.name": "web"
+    },
+    "creationTimestamp": "2026-01-15T10:00:00Z",
+    "uid": "00000000-0000-4000-8000-000000000001",
+    "resourceVersion": "1"
+  },
+  "report": {
+    "artifact": {
+      "repository": "demo/web",
+      "tag": "1.4.2",
+      "digest": "sha256:ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12ab12"
+    },
+    "registry": {
+      "server": "registry.example.com"
+    },
+    "scanner": {
+      "name": "Trivy",
+      "vendor": "Aqua Security",
+      "version": "0.60.0"
+    },
+    "summary": {
+      "componentsCount": 2,
+      "dependenciesCount": 1
+    },
+    "updateTimestamp": "2026-01-15T10:00:00Z",
+    "components": {
+      "bomFormat": "CycloneDX",
+      "specVersion": "1.6",
+      "serialNumber": "urn:uuid:00000000-0000-4000-8000-000000000003",
+      "version": 1,
+      "components": [
+        {
+          "bom-ref": "c-1",
+          "name": "libexample",
+          "version": "1.0.0",
+          "type": "library",
+          "purl": "pkg:deb/debian/libexample@1.0.0"
+        },
+        {
+          "bom-ref": "c-2",
+          "name": "libsample",
+          "version": "2.3.0",
+          "type": "library",
+          "purl": "pkg:deb/debian/libsample@2.3.0"
+        }
+      ],
+      "dependencies": [
+        {
+          "ref": "c-1",
+          "dependsOn": ["c-2"]
+        }
+      ]
+    }
+  }
+}

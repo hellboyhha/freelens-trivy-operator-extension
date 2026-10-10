@@ -1,0 +1,53 @@
+{
+  "apiVersion": "aquasecurity.github.io/v1alpha1",
+  "kind": "RbacAssessmentReport",
+  "metadata": {
+    "name": "role-web-reader",
+    "labels": {
+      "app.kubernetes.io/managed-by": "trivy-operator",
+      "trivy-operator.resource.kind": "Role",
+      "trivy-operator.resource.name": "web-reader",
+      "trivy-operator.resource.namespace": "demo"
+    },
+    "creationTimestamp": "2026-01-15T10:00:00Z",
+    "uid": "00000000-0000-4000-8000-000000000001",
+    "resourceVersion": "1",
+    "namespace": "demo",
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "Role",
+        "name": "web-reader",
+        "uid": "00000000-0000-4000-8000-000000000002",
+        "controller": true,
+        "blockOwnerDeletion": false
+      }
+    ]
+  },
+  "report": {
+    "scanner": {
+      "name": "Trivy",
+      "vendor": "Aqua Security",
+      "version": "0.60.0"
+    },
+    "summary": {
+      "criticalCount": 0,
+      "highCount": 0,
+      "mediumCount": 1,
+      "lowCount": 0
+    },
+    "updateTimestamp": "2026-01-15T10:00:00Z",
+    "checks": [
+      {
+        "checkID": "AVD-KSV-0113",
+        "title": "Manage namespace secrets",
+        "description": "Viewing secrets at the namespace scope can lead to escalation.",
+        "category": "Kubernetes Security Check",
+        "severity": "MEDIUM",
+        "success": false,
+        "messages": ["Role 'web-reader' shouldn't have access to manage secrets in namespace 'demo'"],
+        "remediation": "Remove resource 'secrets' from role"
+      }
+    ]
+  }
+}

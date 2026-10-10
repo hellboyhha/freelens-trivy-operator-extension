@@ -1,0 +1,62 @@
+{
+  "apiVersion": "aquasecurity.github.io/v1alpha1",
+  "kind": "ClusterConfigAuditReport",
+  "metadata": {
+    "name": "persistentvolume-pv-demo",
+    "labels": {
+      "app.kubernetes.io/managed-by": "trivy-operator",
+      "trivy-operator.resource.kind": "PersistentVolume",
+      "trivy-operator.resource.name": "pv-demo",
+      "trivy-operator.resource.namespace": ""
+    },
+    "creationTimestamp": "2026-01-15T10:00:00Z",
+    "uid": "00000000-0000-4000-8000-000000000001",
+    "resourceVersion": "1"
+  },
+  "report": {
+    "scanner": {
+      "name": "Trivy",
+      "vendor": "Aqua Security",
+      "version": "0.60.0"
+    },
+    "summary": {
+      "criticalCount": 0,
+      "highCount": 1,
+      "mediumCount": 0,
+      "lowCount": 1
+    },
+    "updateTimestamp": "2026-01-15T10:00:00Z",
+    "checks": [
+      {
+        "checkID": "AVD-KSV-0014",
+        "title": "Root file system is not read-only",
+        "description": "An immutable root file system prevents applications from writing to their local disk.",
+        "category": "Kubernetes Security Check",
+        "severity": "HIGH",
+        "success": false,
+        "messages": ["Container 'web' of Deployment 'web' should set 'securityContext.readOnlyRootFilesystem' to true"],
+        "remediation": "Change 'containers[].securityContext.readOnlyRootFilesystem' to 'true'."
+      },
+      {
+        "checkID": "AVD-KSV-0015",
+        "title": "CPU requests not specified",
+        "description": "Resource requests let the scheduler place pods.",
+        "category": "Kubernetes Security Check",
+        "severity": "LOW",
+        "success": false,
+        "messages": ["Container 'web' of Deployment 'web' should set 'resources.requests.cpu'"],
+        "remediation": "Set 'containers[].resources.requests.cpu'."
+      },
+      {
+        "checkID": "AVD-KSV-0001",
+        "title": "Can elevate its own privileges",
+        "description": "A program inside the container can elevate its own privileges.",
+        "category": "Kubernetes Security Check",
+        "severity": "MEDIUM",
+        "success": true,
+        "messages": [],
+        "remediation": ""
+      }
+    ]
+  }
+}

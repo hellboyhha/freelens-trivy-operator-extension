@@ -1,0 +1,203 @@
+@use "../vars" as *;
+
+// Selecting reports and rescanning them: the bar above the list, the confirmation, and the row that
+// waits for the operator. Colours are theme variables.
+
+// A button in the list's toolbar: 30px tall like the chips and the scope switch. Off, it is dashed and grey.
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 14px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--textColorPrimary);
+  cursor: pointer;
+  font: inherit;
+  white-space: nowrap;
+
+  &:disabled {
+    border-style: dashed;
+    color: var(--textColorTertiary);
+    cursor: not-allowed;
+  }
+}
+
+.button {
+  padding: 5px 14px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--textColorPrimary);
+  cursor: pointer;
+  font: inherit;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.primary,
+.tool.primary {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog {
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  padding: calc($unit * 2.5);
+  border: 1px solid var(--borderColor);
+  border-radius: calc($unit);
+  background: var(--contentColor);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  color: var(--textColorPrimary);
+  line-height: 1.5;
+
+  h4 {
+    margin: 0 0 $unit;
+    font-size: 1.15em;
+  }
+
+  p {
+    margin: 0;
+    color: var(--textColorSecondary);
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 4px calc($unit * 1.5);
+  margin: calc($unit * 1.5) 0;
+  padding: calc($unit * 1.25) calc($unit * 1.5);
+  border: 1px solid var(--borderFaintColor, var(--borderColor));
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--textColorSecondary) 7%, transparent);
+  font-size: 0.92em;
+
+  dt {
+    color: var(--textColorTertiary);
+  }
+
+  dd {
+    margin: 0;
+    word-break: break-all;
+  }
+}
+
+// `.dialog p` resets paragraph margins, so the note names the dialog to win over it.
+.dialog .note {
+  margin-top: $unit;
+  font-size: 0.92em;
+}
+
+.list {
+  margin: $unit 0 0;
+  padding-left: calc($unit * 2);
+  max-height: 120px;
+  overflow: auto;
+  color: var(--textColorSecondary);
+  font-size: 0.92em;
+}
+
+.typed {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: $unit;
+  padding: 6px 10px;
+  border: 1px solid var(--inputControlBorder, var(--borderColor));
+  border-radius: 5px;
+  background: var(--inputControlBackground, transparent);
+  color: var(--textColorPrimary);
+  font: inherit;
+
+  &:focus {
+    border-color: var(--colorInfo);
+    outline: none;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $unit;
+  margin-top: calc($unit * 2);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--primary) 22%, transparent);
+  color: var(--primary);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.stale {
+  background: color-mix(in srgb, var(--colorWarning) 24%, transparent);
+  color: var(--colorWarning);
+}
+
+.spinner {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.drawerAction {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $unit;
+  margin-bottom: $unit;
+}
+
+.failed {
+  background: color-mix(in srgb, var(--colorError) 22%, transparent);
+  color: var(--colorError);
+}
+
+.status {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  max-width: 100%;
+}
+
+.statusNote {
+  color: var(--textColorSecondary);
+  font-size: 0.85em;
+  line-height: 1.3;
+  white-space: normal;
+}

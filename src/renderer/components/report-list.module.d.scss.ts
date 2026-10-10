@@ -1,0 +1,24 @@
+declare const classNames: {
+  readonly page: "page";
+  readonly tableRow: "tableRow";
+  readonly tableHead: "tableHead";
+  readonly tableCell: "tableCell";
+  readonly workload: "workload";
+  readonly image: "image";
+  readonly issue: "issue";
+  readonly severityCell: "severityCell";
+  readonly format: "format";
+  readonly number: "number";
+  readonly frame: "frame";
+  readonly frameBody: "frameBody";
+  readonly listRoot: "listRoot";
+  readonly chipsAndCount: "chipsAndCount";
+  readonly centered: "centered";
+  readonly count: "count";
+  readonly above: "above";
+  readonly toolbar: "toolbar";
+  readonly tools: "tools";
+  readonly listBody: "listBody";
+  readonly clear: "clear";
+};
+export = classNames;

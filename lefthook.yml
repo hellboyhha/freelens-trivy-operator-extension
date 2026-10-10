@@ -1,0 +1,16 @@
+# Git hooks. Install with `pnpm hooks:install`.
+# They call the same gate CI runs; see tools/check.mjs.
+pre-commit:
+  commands:
+    fast:
+      run: pnpm check:fast
+
+commit-msg:
+  commands:
+    conventional:
+      run: node tools/commit-msg.mjs {1}
+
+pre-push:
+  commands:
+    full:
+      run: pnpm check

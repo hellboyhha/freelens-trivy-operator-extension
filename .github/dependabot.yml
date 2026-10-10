@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    # Freelens provides these at runtime; the extension must build against the
+    # same major version as the host, so major bumps are done by hand.
+    ignore:
+      - dependency-name: react
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: react-dom
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@testing-library/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: mobx
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: mobx-react
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@freelensapp/extensions"
+        update-types: ["version-update:semver-major"]
+    groups:
+      dev-tooling:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci(deps)"

@@ -1,0 +1,20 @@
+declare const classNames: {
+  readonly tool: "tool";
+  readonly button: "button";
+  readonly primary: "primary";
+  readonly overlay: "overlay";
+  readonly dialog: "dialog";
+  readonly facts: "facts";
+  readonly note: "note";
+  readonly list: "list";
+  readonly typed: "typed";
+  readonly actions: "actions";
+  readonly pill: "pill";
+  readonly stale: "stale";
+  readonly spinner: "spinner";
+  readonly drawerAction: "drawerAction";
+  readonly failed: "failed";
+  readonly status: "status";
+  readonly statusNote: "statusNote";
+};
+export = classNames;

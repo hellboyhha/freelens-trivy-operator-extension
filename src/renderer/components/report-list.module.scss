@@ -1,0 +1,156 @@
+.page {
+  // Rows hold two-line cells, so they grow; a soft line between them and a hover tint.
+  :global(.TableRow) {
+    height: auto;
+    min-height: 56px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid color-mix(in srgb, var(--borderColor) 45%, transparent);
+
+    &:hover {
+      background: color-mix(in srgb, var(--textColorSecondary) 7%, transparent);
+    }
+  }
+
+  // Column headers: small, muted capitals.
+  :global(.TableHead) :global(.TableCell) {
+    color: var(--textColorSecondary);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  :global(.TableCell) {
+    &.workload {
+      flex-grow: 2;
+    }
+
+    &.image {
+      flex-grow: 2.2;
+    }
+
+    &.issue {
+      flex-grow: 2.4;
+    }
+
+    // Bar (140px) + four numbers.
+    &.severityCell {
+      flex-grow: 0;
+      flex-basis: 290px;
+      min-width: 290px;
+    }
+
+    // Text such as "CycloneDX 1.7": left-aligned, wide enough for the label and the sort arrow, and set
+    // apart from the right-aligned number column before it.
+    &.format {
+      flex-grow: 0.6;
+      flex-basis: 170px;
+      min-width: 170px;
+      padding-left: 20px;
+    }
+
+    &.number {
+      flex-grow: 0.5;
+      justify-content: flex-end;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+  }
+}
+
+// Layout of every report page. Freelens already puts a 16px margin around the page, and the list
+// card sits on that margin, so everything above the card (tabs, banner, chips, switch) is flush
+// with the card's edge and spaced by one step. No horizontal padding of our own: that is what made
+// the controls sit 20px further in than the card.
+$step: 12px;
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  gap: $step;
+  height: 100%;
+  min-height: 0;
+}
+
+.frameBody {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.listRoot {
+  display: flex;
+  flex-direction: column;
+  gap: $step;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.chipsAndCount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+// An explanation in the middle of the page, with the empty-state's own top margin removed.
+.centered {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    margin-top: 0;
+  }
+}
+
+.count {
+  color: var(--textColorTertiary);
+}
+
+.above {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: $step;
+  min-width: 0;
+}
+
+// Filter chips on the left, the scope switch on the right, wrapping on a narrow window.
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.listBody {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+// "Clear" next to the selected count: a link, not a button.
+.clear {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primary);
+  cursor: pointer;
+  font: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

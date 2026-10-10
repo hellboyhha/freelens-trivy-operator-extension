@@ -1,0 +1,75 @@
+{
+  "apiVersion": "aquasecurity.github.io/v1alpha1",
+  "kind": "ClusterComplianceReport",
+  "metadata": {
+    "name": "demo-benchmark",
+    "creationTimestamp": "2026-01-15T10:00:00Z",
+    "uid": "00000000-0000-4000-8000-000000000004",
+    "resourceVersion": "1",
+    "labels": {
+      "app.kubernetes.io/managed-by": "trivy-operator"
+    }
+  },
+  "spec": {
+    "cron": "0 */6 * * *",
+    "reportType": "summary",
+    "compliance": {
+      "id": "demo-benchmark",
+      "title": "Demo Benchmark v1.0",
+      "description": "Synthetic benchmark for tests",
+      "version": "1.0",
+      "platform": "k8s",
+      "type": "cis",
+      "relatedResources": ["https://example.com/benchmark"],
+      "controls": [
+        {
+          "id": "1.1.1",
+          "name": "First control",
+          "description": "First",
+          "severity": "HIGH",
+          "checks": [
+            {
+              "id": "AVD-KCV-0001"
+            }
+          ]
+        },
+        {
+          "id": "1.1.2",
+          "name": "Second control",
+          "description": "Second",
+          "severity": "LOW",
+          "commands": [
+            {
+              "id": "CMD-0001"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "status": {
+    "updateTimestamp": "2026-01-15T10:00:00Z",
+    "summary": {
+      "failCount": 1,
+      "passCount": 1
+    },
+    "summaryReport": {
+      "id": "demo-benchmark",
+      "title": "Demo Benchmark v1.0",
+      "controlCheck": [
+        {
+          "id": "1.1.1",
+          "name": "First control",
+          "severity": "HIGH",
+          "totalFail": 3
+        },
+        {
+          "id": "1.1.2",
+          "name": "Second control",
+          "severity": "LOW",
+          "totalFail": 0
+        }
+      ]
+    }
+  }
+}

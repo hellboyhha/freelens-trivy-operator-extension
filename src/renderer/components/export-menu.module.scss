@@ -1,0 +1,82 @@
+@use "../vars" as *;
+
+.root {
+  position: relative;
+}
+
+.button {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--textColorPrimary);
+  cursor: pointer;
+  font: inherit;
+
+  &:hover:not(:disabled) {
+    border-color: var(--textColorAccent);
+  }
+
+  &:disabled {
+    border-style: dashed;
+    color: var(--textColorTertiary);
+    cursor: not-allowed;
+  }
+}
+
+// The menu floats over the list. It must stay out of the flow: with `position: static` it sits between the
+// toolbar and the search row, and opening it pushes the table down by its own height.
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 100;
+  min-width: 260px;
+  padding: 4px;
+  border: 1px solid var(--borderColor);
+  border-radius: 6px;
+  background: var(--contentColor);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+// The first line of the menu says what is exported. Name on top, hint under it, so neither wraps.
+.scope {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 4px;
+  padding: 6px 10px 8px;
+  border-bottom: 1px solid var(--borderColor);
+  white-space: nowrap;
+
+  small {
+    color: var(--textColorSecondary);
+  }
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc($unit * 2);
+  width: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--textColorPrimary);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+
+  small {
+    color: var(--textColorSecondary);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: color-mix(in srgb, var(--primary) 16%, transparent);
+    outline: none;
+  }
+}
