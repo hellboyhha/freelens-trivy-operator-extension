@@ -5,6 +5,14 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.3] - 10 October 2026
+
+### Fixed
+
+- Rescan is no longer offered for SBOM reports. The operator does not regenerate an SBOM report that
+  is deleted, so rescanning one only made it disappear. Vulnerabilities, Secrets, Config Audit and RBAC
+  reports still rescan, and exporting an SBOM list is unchanged.
+
 ## [0.1.2] - 10 October 2026
 
 ### Fixed
