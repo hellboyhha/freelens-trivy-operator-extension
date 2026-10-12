@@ -10,7 +10,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fixture } from "../../../test/fixtures";
 import { notifications, testStores } from "../../../test/freelens-extensions";
 import { selectableStore } from "../../../test/stores";
-import { ConfigAuditReport, ExposedSecretReport, VulnerabilityReport } from "../api/trivy";
+import { ConfigAuditReport, ExposedSecretReport, SbomReport, VulnerabilityReport } from "../api/trivy";
 import { rescanTracker } from "../api/trivy/rescan-tracker";
 import { ChecksDetails, ComplianceDetails, SbomDetails, SecretDetails, VulnerabilityDetails } from "./report-details";
 import { WorkloadDetails } from "./workload-details";
@@ -264,6 +264,13 @@ describe("Rescan from a drawer", () => {
 
   it("is not on a Compliance report, whose deletion would delete the benchmark", () => {
     render(<ComplianceDetails object={fixture("clustercompliancereport")} extension={extension} />);
+    expect(screen.queryByRole("button", { name: /Rescan/ })).toBeNull();
+  });
+
+  it("is not on an SBOM report, because the operator does not regenerate one that is deleted", () => {
+    const object = new (SbomReport as any)(fixture("sbomreport"));
+    testStores.set(SbomReport, selectableStore([object]));
+    render(<SbomDetails object={object} extension={extension} />);
     expect(screen.queryByRole("button", { name: /Rescan/ })).toBeNull();
   });
 

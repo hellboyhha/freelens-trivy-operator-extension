@@ -423,7 +423,6 @@ export const SbomDetails = observer((props: DetailsProps) =>
         <style>{stylesInline}</style>
         <UiStyles />
         <SeverityStyles />
-        <RescanAction items={[object]} after={hideDetails} />
         <DrawerTitle>Report</DrawerTitle>
         <Meta object={object} report={report} />
         <DrawerItem name="Format">

@@ -151,6 +151,7 @@ const SbomList = createReportListPage<ReportObject>({
   columns: sbomColumns,
   packageSearch: true,
   defaultSort: "components",
+  rescan: false,
 });
 
 const ClusterSbomList = createReportListPage<ReportObject>({
@@ -161,6 +162,7 @@ const ClusterSbomList = createReportListPage<ReportObject>({
   columns: sbomColumns,
   packageSearch: true,
   defaultSort: "components",
+  rescan: false,
 });
 
 /** Every per-kind list by the name of its fixture; the pages below choose between them. */

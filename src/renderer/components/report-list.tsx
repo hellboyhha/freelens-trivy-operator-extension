@@ -39,6 +39,11 @@ export interface ReportListOptions<T extends ReportObject> {
   packageSearch?: boolean;
   /** Filter ids that are on when the page opens. */
   defaultFilters?: string[];
+  /**
+   * Whether Rescan is offered. True by default. SBOM lists set it false: the operator does not
+   * regenerate an SBOM report that is deleted, so deleting one would only make it vanish.
+   */
+  rescan?: boolean;
 }
 
 /** What the list reads from the host's store, besides what every list needs. */
@@ -158,7 +163,9 @@ export function createReportListPage<T extends ReportObject>(options: ReportList
               </span>
             </div>
             <div className={styles.tools}>
-              <RescanToolbarButton count={chosen.length} onClick={() => rescan.ask(chosen)} />
+              {options.rescan !== false ? (
+                <RescanToolbarButton count={chosen.length} onClick={() => rescan.ask(chosen)} />
+              ) : null}
               <ExportMenu title={options.title} items={chosen} />
               {props.aside}
             </div>

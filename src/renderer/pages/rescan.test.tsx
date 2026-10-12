@@ -139,8 +139,8 @@ describe("the toolbar actions", () => {
     expect(container.querySelector('[data-host-remove="false"]')).not.toBeNull();
   });
 
-  it("is on every report list, but not on Compliance", () => {
-    for (const name of ["exposedsecretreport", "sbomreport", "configauditreport"]) {
+  it("is on every report list, but not on Compliance or SBOM", () => {
+    for (const name of ["exposedsecretreport", "configauditreport"]) {
       cleanup();
       testStores.clear();
       stock(name);
@@ -148,6 +148,16 @@ describe("the toolbar actions", () => {
       render(<P extension={extension} />);
       expect(screen.getAllByTestId("select").length, name).toBeGreaterThan(0);
     }
+
+    // SBOM: the operator does not regenerate a deleted SBOM report, so Rescan must not be offered.
+    cleanup();
+    testStores.clear();
+    stock("sbomreport");
+    const SbomPage = Page("sbomreport");
+    render(<SbomPage extension={extension} />);
+    expect(screen.queryByRole("button", { name: /^Rescan/ })).toBeNull();
+    expect(screen.getByRole("button", { name: /^Export/ })).toBeTruthy();
+
     cleanup();
     testStores.set(
       Kind("clustercompliancereport"),
