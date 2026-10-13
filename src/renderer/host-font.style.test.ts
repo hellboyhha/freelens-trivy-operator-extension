@@ -83,6 +83,15 @@ describe("the extension's stylesheets follow the Freelens font", () => {
     const restyled = styles.filter((file) => /TableHead/.test(readFileSync(file, "utf8")));
     expect(restyled.map((file) => file.slice(root.length))).toEqual([]);
   });
+
+  it("keeps number columns wide enough for their header at the host's size", () => {
+    // "Dependencies" and "Components" measured 88px and 80px of text plus the sort arrow in the running app;
+    // with no minimum the columns shrank below that and the header was cut off.
+    const list = readFileSync(join(root, "components/report-list.module.scss"), "utf8");
+    const rule = /&\.number\s*\{([^}]*)\}/.exec(list)?.[1] ?? "";
+    const minWidth = Number(/min-width:\s*(\d+)px/.exec(rule)?.[1] ?? 0);
+    expect(minWidth).toBeGreaterThanOrEqual(110);
+  });
 });
 
 describe("the components do not style type inline", () => {
