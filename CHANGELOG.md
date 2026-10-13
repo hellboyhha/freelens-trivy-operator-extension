@@ -5,6 +5,27 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.4] - 14 October 2026
+
+### Changed
+
+- **Critical, High, Medium and Low are four columns.** Every report list (Vulnerabilities, Exposed Secrets,
+  Config Audit, RBAC, Infra, and their cluster-scoped versions) and the Overview's *Fix first* table show a
+  labelled column for each severity instead of a bar with four unlabelled numbers. Each column sorts on its
+  own count, with ties broken by overall severity, and lists still open worst first. Findings Trivy cannot
+  rate still count in totals and exports.
+- **The Overview matches Freelens' own pages.** It opens with the same header bar (*Overview* at the left,
+  the namespace selector at the right). *Fix first* and *Compliance* are stacked at the full width, so
+  nothing is cut off, and *Compliance* is a table of Benchmark, Failing and Passing.
+- **Freelens' own font, sizes and weights everywhere.** The extension no longer sets a typeface of its own,
+  and table headers are the same size and colour as Freelens' tables. Number column headers (Components,
+  Dependencies, Fixable, Scanned) leave room for the sort arrow.
+
+### Fixed
+
+- Critical and High counts are coloured. In every earlier version they were grey, because the colour class
+  was never applied. All four severities now use the colours of the bars and tiles.
+
 ## [0.1.3] - 10 October 2026
 
 ### Fixed
