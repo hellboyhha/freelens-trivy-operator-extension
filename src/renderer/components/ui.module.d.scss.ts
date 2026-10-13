@@ -33,6 +33,8 @@ declare const classNames: {
   readonly sevNum: "sevNum";
   readonly sevNumCritical: "sevNumCritical";
   readonly sevNumHigh: "sevNumHigh";
+  readonly sevNumMedium: "sevNumMedium";
+  readonly sevNumLow: "sevNumLow";
   readonly sevZero: "sevZero";
 };
 export = classNames;

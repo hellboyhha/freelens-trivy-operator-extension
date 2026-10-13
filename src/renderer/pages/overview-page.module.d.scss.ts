@@ -24,7 +24,6 @@ declare const classNames: {
   readonly compliance: "compliance";
   readonly benchmarkName: "benchmarkName";
   readonly passFail: "passFail";
-  readonly progress: "progress";
   readonly failingCount: "failingCount";
   readonly skeletons: "skeletons";
 };

@@ -360,7 +360,6 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
                         <TableCell className={styles.benchmarkName}>Benchmark</TableCell>
                         <TableCell className={styles.passFail}>Failing</TableCell>
                         <TableCell className={styles.passFail}>Passing</TableCell>
-                        <TableCell className={styles.progress}>Progress</TableCell>
                       </TableHead>
                       {benchmarks.map((row) => (
                         <TableRow key={row.id} nowrap>
@@ -369,9 +368,6 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
                           </TableCell>
                           <TableCell className={`${styles.passFail} ${styles.failingCount}`}>{row.failing}</TableCell>
                           <TableCell className={styles.passFail}>{row.passing}</TableCell>
-                          <TableCell className={styles.progress}>
-                            <PassFailBar passing={row.passing} failing={row.failing} />
-                          </TableCell>
                         </TableRow>
                       ))}
                     </Table>

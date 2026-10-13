@@ -290,14 +290,23 @@ $control-height: 30px;
   color: var(--textColorSecondary);
 }
 
-.sevNum_critical {
+.sevNumCritical {
   color: var(--colorError);
   font-weight: var(--font-weight-semibold);
 }
 
-.sevNum_high {
+.sevNumHigh {
   color: var(--colorWarning);
   font-weight: var(--font-weight-semibold);
+}
+
+// The same colours as the bar segments and the tile dots, so a level looks the same everywhere.
+.sevNumMedium {
+  color: color-mix(in srgb, var(--colorWarning) 40%, var(--textColorSecondary));
+}
+
+.sevNumLow {
+  color: var(--textColorSecondary);
 }
 
 .sevZero {

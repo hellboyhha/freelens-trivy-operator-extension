@@ -48,8 +48,8 @@ export function SeverityBar({ counts }: { counts: SeverityCounts }) {
 const SEVERITY_NUMBER_CLASS = {
   critical: styles.sevNumCritical,
   high: styles.sevNumHigh,
-  medium: undefined,
-  low: undefined,
+  medium: styles.sevNumMedium,
+  low: styles.sevNumLow,
 } as const;
 
 /** One severity count in its own column: critical and high are coloured, a zero is faint. */

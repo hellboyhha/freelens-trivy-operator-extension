@@ -23,9 +23,20 @@ describe("CSS module class lookups", () => {
     expect(offenders).toEqual([]);
   });
 
-  it("colour the critical and high counts through their exported classes", () => {
+  it("colour every severity count through its own exported class", () => {
     const ui = readFileSync(join(root, "components/ui.tsx"), "utf8");
-    expect(ui).toMatch(/styles\.sevNumCritical/);
-    expect(ui).toMatch(/styles\.sevNumHigh/);
+    for (const name of ["sevNumCritical", "sevNumHigh", "sevNumMedium", "sevNumLow"])
+      expect(ui, name).toMatch(new RegExp(`styles\\.${name}`));
+  });
+
+  it("give the four counts the colours the bars and tiles use, so a level looks the same everywhere", () => {
+    const scss = readFileSync(join(root, "components/ui.module.scss"), "utf8");
+    const rule = (name: string) => new RegExp(`\\.${name}\\s*\\{([^}]*)\\}`).exec(scss)?.[1] ?? "";
+    expect(rule("sevNumCritical")).toMatch(/color:\s*var\(--colorError\)/);
+    expect(rule("sevNumHigh")).toMatch(/color:\s*var\(--colorWarning\)/);
+    expect(rule("sevNumMedium")).toMatch(
+      /color:\s*color-mix\(in srgb, var\(--colorWarning\) 40%, var\(--textColorSecondary\)\)/,
+    );
+    expect(rule("sevNumLow")).toMatch(/color:/);
   });
 });

@@ -474,15 +474,17 @@ describe("Overview", () => {
     expect(container.textContent).not.toContain("Trivy Operator Overview");
   });
 
-  it("lists the benchmarks in a table with failing, passing and progress", () => {
+  it("lists the benchmarks in a table with failing and passing, and no progress bar", () => {
     stockStores(...ALL);
     const { container } = render(<OverviewPage extension={extension} />);
     const text = container.textContent ?? "";
-    for (const head of ["Benchmark", "Failing", "Passing", "Progress"]) expect(text).toContain(head);
+    for (const head of ["Benchmark", "Failing", "Passing"]) expect(text).toContain(head);
     expect(text).toContain("Demo Benchmark v1.0");
+    expect(text).not.toContain("Progress");
     expect(text).not.toContain("failing ·");
+    // the only pass/fail bar left on the page is the one inside the Compliance tile
     const bars = [...container.querySelectorAll('[role="img"]')].map((e) => e.getAttribute("aria-label"));
-    expect(bars.some((label) => /^\d+ passing, \d+ failing$/.test(label ?? ""))).toBe(true);
+    expect(bars.filter((label) => /^\d+ passing, \d+ failing$/.test(label ?? ""))).toHaveLength(1);
   });
 
   it("explains an empty selection and offers all namespaces", () => {

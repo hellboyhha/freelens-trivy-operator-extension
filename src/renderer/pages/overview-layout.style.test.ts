@@ -38,14 +38,9 @@ describe("Overview layout", () => {
     expect(rule("title")).toMatch(/color:\s*var\(--textColorPrimary\)/);
   });
 
-  it("sizes the Compliance table columns so the numbers sit under their headers", () => {
+  it("sizes the Compliance table as Benchmark, Failing and Passing, with no progress column", () => {
     expect(scss).toMatch(/&\.benchmarkName/);
     expect(scss).toMatch(/&\.passFail/);
-    expect(scss).toMatch(/&\.progress/);
-  });
-
-  it("lets the progress bar fill its cell (a bar in a flex cell is 0px wide unless it grows)", () => {
-    const progress = /&\.progress\s*\{([^}]*(?:\{[^}]*\}[^}]*)*)\}/.exec(scss)?.[1] ?? "";
-    expect(progress).toMatch(/>\s*\*\s*\{[^}]*flex:\s*1/);
+    expect(scss).not.toMatch(/&\.progress/);
   });
 });

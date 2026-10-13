@@ -151,19 +151,9 @@
       flex-grow: 0;
       flex-basis: 120px;
       min-width: 120px;
-      padding-right: calc($unit * 4.5);
+      padding-right: calc($unit * 2);
       justify-content: flex-end;
       text-align: right;
-    }
-
-    &.progress {
-      flex-grow: 0;
-      flex-basis: 360px;
-      min-width: 360px;
-
-      > * {
-        flex: 1;
-      }
     }
   }
 }
