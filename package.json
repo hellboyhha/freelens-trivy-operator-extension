@@ -1,6 +1,6 @@
 {
   "name": "@hellboyhha/freelens-trivy-operator-extension",
-  "version": "0.1.4-dev.7",
+  "version": "0.1.4-dev.8",
   "description": "Freelens extension for Trivy Operator: vulnerability, config audit, exposed secret, RBAC, SBOM and compliance reports",
   "homepage": "https://github.com/hellboyhha/freelens-trivy-operator-extension#readme",
   "bugs": {

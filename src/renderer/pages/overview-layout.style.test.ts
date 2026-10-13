@@ -1,6 +1,6 @@
 // The Overview stacks Fix first above Compliance and starts with the same header bar Freelens draws on its
 // own pages (measured in Freelens 1.10: --contentColor background, 16px padding on every side, 64px high,
-// title in secondary text colour). These read the stylesheet, so a side-by-side grid or an off-theme bar
+// title in --textColorPrimary). These read the stylesheet, so a side-by-side grid or an off-theme bar
 // cannot come back unnoticed.
 
 import { readFileSync } from "node:fs";
@@ -34,7 +34,8 @@ describe("Overview layout", () => {
     expect(header).toMatch(/padding:\s*calc\(\$unit \* 2\)/);
     expect(header).toMatch(/min-height:\s*calc\(\$unit \* 8\)/);
     expect(header).toMatch(/justify-content:\s*space-between/);
-    expect(rule("title")).toMatch(/color:\s*var\(--textColorSecondary\)/);
+    // Freelens: `.WorkloadsOverview .header h5 { color: var(--textColorPrimary) }`
+    expect(rule("title")).toMatch(/color:\s*var\(--textColorPrimary\)/);
   });
 
   it("sizes the Compliance table columns so the numbers sit under their headers", () => {
