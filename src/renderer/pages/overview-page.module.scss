@@ -125,10 +125,11 @@
       flex-grow: 2;
     }
 
+    // Bar + four numbers + the unknown count: 349px of content and 16px of padding.
     &.severity {
       flex-grow: 0;
-      flex-basis: 290px;
-      min-width: 290px;
+      flex-basis: 368px;
+      min-width: 368px;
     }
 
     &.clears {

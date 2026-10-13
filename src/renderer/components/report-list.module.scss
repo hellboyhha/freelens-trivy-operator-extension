@@ -25,11 +25,11 @@
       flex-grow: 2.4;
     }
 
-    // Bar (140px) + four numbers.
+    // Bar (140px) + four numbers + the unknown count ("+103 unknown"): 349px of content and 16px of padding.
     &.severityCell {
       flex-grow: 0;
-      flex-basis: 290px;
-      min-width: 290px;
+      flex-basis: 368px;
+      min-width: 368px;
     }
 
     // Text such as "CycloneDX 1.7": left-aligned, wide enough for the label and the sort arrow, and set
