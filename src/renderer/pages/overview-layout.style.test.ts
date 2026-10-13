@@ -43,4 +43,9 @@ describe("Overview layout", () => {
     expect(scss).toMatch(/&\.passFail/);
     expect(scss).toMatch(/&\.progress/);
   });
+
+  it("lets the progress bar fill its cell (a bar in a flex cell is 0px wide unless it grows)", () => {
+    const progress = /&\.progress\s*\{([^}]*(?:\{[^}]*\}[^}]*)*)\}/.exec(scss)?.[1] ?? "";
+    expect(progress).toMatch(/>\s*\*\s*\{[^}]*flex:\s*1/);
+  });
 });
