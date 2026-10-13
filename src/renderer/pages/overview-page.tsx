@@ -192,7 +192,7 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
         <SeverityStyles />
         <div className={styles.overview}>
           <div className={styles.header}>
-            <h5 className={styles.title}>Trivy Operator Overview</h5>
+            <h5 className={styles.title}>Overview</h5>
             <div className={styles.namespaces}>
               <NamespaceSelectFilter id="trivy-overview-namespace-filter" />
             </div>
@@ -304,7 +304,7 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
                 />
               </div>
 
-              <div className={styles.columns}>
+              <div className={styles.stack}>
                 {rows.length > 0 ? (
                   <div className={styles.section}>
                     <h6 className={styles.sectionTitle}>Fix first</h6>
@@ -350,17 +350,26 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
                 {benchmarks.length > 0 ? (
                   <div className={styles.section}>
                     <h6 className={styles.sectionTitle}>Compliance</h6>
-                    {benchmarks.map((row) => (
-                      <MaybeLink key={row.id} to={url(COMPLIANCE_PAGE_ID)} className={styles.benchmark}>
-                        <span className={styles.benchmarkHead}>
-                          <span>{row.title}</span>
-                          <span className={styles.benchmarkNumbers}>
-                            <b>{row.failing}</b> failing · {row.passing} passing
-                          </span>
-                        </span>
-                        <PassFailBar passing={row.passing} failing={row.failing} />
-                      </MaybeLink>
-                    ))}
+                    <Table scrollable={false} sortSyncWithUrl={false} className={styles.compliance}>
+                      <TableHead flat sticky={false}>
+                        <TableCell className={styles.benchmarkName}>Benchmark</TableCell>
+                        <TableCell className={styles.passFail}>Failing</TableCell>
+                        <TableCell className={styles.passFail}>Passing</TableCell>
+                        <TableCell className={styles.progress}>Progress</TableCell>
+                      </TableHead>
+                      {benchmarks.map((row) => (
+                        <TableRow key={row.id} nowrap>
+                          <TableCell className={styles.benchmarkName}>
+                            <MaybeLink to={url(COMPLIANCE_PAGE_ID)}>{row.title}</MaybeLink>
+                          </TableCell>
+                          <TableCell className={`${styles.passFail} ${styles.failingCount}`}>{row.failing}</TableCell>
+                          <TableCell className={styles.passFail}>{row.passing}</TableCell>
+                          <TableCell className={styles.progress}>
+                            <PassFailBar passing={row.passing} failing={row.failing} />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </Table>
                   </div>
                 ) : null}
               </div>

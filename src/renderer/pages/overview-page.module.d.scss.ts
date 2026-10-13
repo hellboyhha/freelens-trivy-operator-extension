@@ -12,7 +12,7 @@ declare const classNames: {
   readonly tileNA: "tileNA";
   readonly tileUnit: "tileUnit";
   readonly tileNote: "tileNote";
-  readonly columns: "columns";
+  readonly stack: "stack";
   readonly section: "section";
   readonly sectionTitle: "sectionTitle";
   readonly table: "table";
@@ -21,9 +21,11 @@ declare const classNames: {
   readonly image: "image";
   readonly severity: "severity";
   readonly clears: "clears";
-  readonly benchmark: "benchmark";
-  readonly benchmarkHead: "benchmarkHead";
-  readonly benchmarkNumbers: "benchmarkNumbers";
+  readonly compliance: "compliance";
+  readonly benchmarkName: "benchmarkName";
+  readonly passFail: "passFail";
+  readonly progress: "progress";
+  readonly failingCount: "failingCount";
   readonly skeletons: "skeletons";
 };
 export = classNames;

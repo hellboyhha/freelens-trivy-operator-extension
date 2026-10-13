@@ -74,7 +74,7 @@ export function SeverityCell({ counts }: { counts: SeverityCounts }) {
 export function PassFailBar({ passing, failing }: { passing: number; failing: number }) {
   const total = passing + failing;
   return (
-    <div className={styles.bar}>
+    <div className={styles.bar} role="img" aria-label={`${passing} passing, ${failing} failing`}>
       {total > 0 ? (
         <>
           <i className={styles.segOk} style={{ width: `${(passing / total) * 100}%` }} />

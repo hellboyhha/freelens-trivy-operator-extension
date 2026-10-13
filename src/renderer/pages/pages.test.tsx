@@ -456,7 +456,6 @@ describe("Overview", () => {
   it("leads with the critical count, then tiles, the fix-first list and the benchmarks", () => {
     stockStores(...ALL);
     const { container } = render(<OverviewPage extension={extension} />);
-    expect(container.textContent).toContain("Trivy Operator Overview");
     const text = container.textContent ?? "";
     expect(text).toContain("2 critical");
     expect(text).toContain("2 have a fix");
@@ -465,6 +464,25 @@ describe("Overview", () => {
     expect(text).toContain("Fix first");
     expect(text).toContain("demo/web:1.4.2");
     expect(text).toContain("Demo Benchmark v1.0");
+  });
+
+  it("titles the page bar Overview, as Freelens' own pages do", () => {
+    stockStores(...ALL);
+    const { container } = render(<OverviewPage extension={extension} />);
+    const title = container.querySelector("h5");
+    expect(title?.textContent).toBe("Overview");
+    expect(container.textContent).not.toContain("Trivy Operator Overview");
+  });
+
+  it("lists the benchmarks in a table with failing, passing and progress", () => {
+    stockStores(...ALL);
+    const { container } = render(<OverviewPage extension={extension} />);
+    const text = container.textContent ?? "";
+    for (const head of ["Benchmark", "Failing", "Passing", "Progress"]) expect(text).toContain(head);
+    expect(text).toContain("Demo Benchmark v1.0");
+    expect(text).not.toContain("failing ·");
+    const bars = [...container.querySelectorAll('[role="img"]')].map((e) => e.getAttribute("aria-label"));
+    expect(bars.some((label) => /^\d+ passing, \d+ failing$/.test(label ?? ""))).toBe(true);
   });
 
   it("explains an empty selection and offers all namespaces", () => {
