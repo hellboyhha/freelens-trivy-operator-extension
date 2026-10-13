@@ -97,7 +97,7 @@ describe("the extension's stylesheets follow the Freelens font", () => {
     expect(px(number, "min-width")).toBeGreaterThanOrEqual(54 + px(number, "padding-right") + 8);
 
     // The counts (SBOM components and dependencies) have the longest headers.
-    const count = rule("count");
+    const count = rule("countColumn");
     expect(px(count, "min-width")).toBeGreaterThanOrEqual(88 + px(number, "padding-right") + 8);
   });
 });

@@ -8,12 +8,13 @@ declare const classNames: {
   readonly severityCell: "severityCell";
   readonly format: "format";
   readonly number: "number";
-  readonly count: "count";
+  readonly countColumn: "countColumn";
   readonly frame: "frame";
   readonly frameBody: "frameBody";
   readonly listRoot: "listRoot";
   readonly chipsAndCount: "chipsAndCount";
   readonly centered: "centered";
+  readonly count: "count";
   readonly above: "above";
   readonly toolbar: "toolbar";
   readonly tools: "tools";
