@@ -31,7 +31,7 @@ import {
   type ReportObject,
   scannedColumn,
   secretsColumn,
-  severityColumn,
+  severityColumns,
   workloadColumn,
   worstIssueColumn,
 } from "../components/report-columns";
@@ -58,7 +58,7 @@ const hideClean: FilterSpec<ReportObject> = {
 const vulnerabilityColumns = [
   workloadColumn<ReportObject>(),
   imageColumn<ReportObject>(),
-  severityColumn(summaryOf),
+  ...severityColumns(summaryOf),
   fixableColumn<ReportObject>(),
   scannedColumn<ReportObject>(),
 ];
@@ -70,7 +70,7 @@ const vulnerabilityFilters: FilterSpec<ReportObject>[] = [
 const checksColumns = [
   workloadColumn<ReportObject>(),
   worstIssueColumn<ReportObject>(),
-  severityColumn(summaryOf),
+  ...severityColumns(summaryOf),
   scannedColumn<ReportObject>(),
 ];
 const checksFilters = [...severityChips, hideClean];
@@ -94,7 +94,7 @@ const VulnerabilitiesList = createReportListPage<ReportObject>({
   getStore: () => VulnerabilityReport.getStore(),
   columns: vulnerabilityColumns,
   filters: vulnerabilityFilters,
-  defaultSort: "severity",
+  defaultSort: "critical",
 });
 
 const ClusterVulnerabilitiesList = createReportListPage<ReportObject>({
@@ -104,7 +104,7 @@ const ClusterVulnerabilitiesList = createReportListPage<ReportObject>({
   getStore: () => ClusterVulnerabilityReport.getStore(),
   columns: vulnerabilityColumns,
   filters: vulnerabilityFilters,
-  defaultSort: "severity",
+  defaultSort: "critical",
 });
 
 const ExposedSecretsList = createReportListPage<ReportObject>({
@@ -116,12 +116,12 @@ const ExposedSecretsList = createReportListPage<ReportObject>({
     workloadColumn<ReportObject>(),
     imageColumn<ReportObject>(),
     secretsColumn<ReportObject>(),
-    severityColumn(summaryOf),
+    ...severityColumns(summaryOf),
     scannedColumn<ReportObject>(),
   ],
   filters: [...severityChips, hideClean],
   defaultFilters: ["hideClean"],
-  defaultSort: "severity",
+  defaultSort: "critical",
 });
 
 const checksList = (kind: { getStore(): unknown; kind: string; crd: { title: string } }, tableId: string) =>
@@ -133,7 +133,7 @@ const checksList = (kind: { getStore(): unknown; kind: string; crd: { title: str
     columns: checksColumns,
     filters: checksFilters,
     defaultFilters: ["hideClean"],
-    defaultSort: "severity",
+    defaultSort: "critical",
   });
 
 const ConfigAuditList = checksList(ConfigAuditReport, "trivyConfigAuditsTable");

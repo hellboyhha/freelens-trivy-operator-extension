@@ -5,7 +5,7 @@ declare const classNames: {
   readonly workload: "workload";
   readonly image: "image";
   readonly issue: "issue";
-  readonly severityCell: "severityCell";
+  readonly severityNumber: "severityNumber";
   readonly format: "format";
   readonly number: "number";
   readonly countColumn: "countColumn";

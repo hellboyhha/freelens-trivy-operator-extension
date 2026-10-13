@@ -18,6 +18,7 @@ import {
   resourceOf,
   severityCounts,
   severityRank,
+  severitySortKey,
   severityWeight,
   sortedVulnerabilities,
   ticketText,
@@ -313,5 +314,26 @@ describe("versionKey", () => {
   });
   it("copes with a missing version", () => {
     expect(versionKey(undefined)).toBe("");
+  });
+});
+
+describe("severitySortKey", () => {
+  const key = (primary: "critical" | "high" | "medium" | "low", c = 0, h = 0, m = 0, l = 0) =>
+    severitySortKey(severityCounts({ criticalCount: c, highCount: h, mediumCount: m, lowCount: l }), primary);
+
+  it("orders by the chosen column's own count, whatever the other counts are", () => {
+    expect(key("high", 0, 5)).toBeGreaterThan(key("high", 9, 4));
+    expect(key("low", 9, 9, 9, 6)).toBeGreaterThan(key("low", 0, 0, 0, 5));
+    expect(key("critical", 3)).toBeGreaterThan(key("critical", 2, 500));
+  });
+
+  it("breaks a tie on the chosen count by the overall severity, worst first", () => {
+    expect(key("medium", 1, 0, 7)).toBeGreaterThan(key("medium", 0, 3, 7));
+    expect(key("medium", 0, 3, 7)).toBeGreaterThan(key("medium", 0, 0, 7, 40));
+  });
+
+  it("gives a clean report zero and stays an exact integer for large counts", () => {
+    expect(key("critical")).toBe(0);
+    expect(Number.isSafeInteger(key("critical", 99999, 99999, 99999, 99999))).toBe(true);
   });
 });

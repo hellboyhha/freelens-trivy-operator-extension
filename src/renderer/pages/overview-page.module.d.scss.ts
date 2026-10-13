@@ -19,7 +19,7 @@ declare const classNames: {
   readonly tableCell: "tableCell";
   readonly workload: "workload";
   readonly image: "image";
-  readonly severity: "severity";
+  readonly severityNumber: "severityNumber";
   readonly clears: "clears";
   readonly compliance: "compliance";
   readonly benchmarkName: "benchmarkName";

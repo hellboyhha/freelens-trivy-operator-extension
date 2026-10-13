@@ -125,11 +125,14 @@
       flex-grow: 2;
     }
 
-    // Bar + four numbers + the unknown count: 349px of content and 16px of padding.
-    &.severity {
+    // One column per severity. The table has no sort arrow, so only the header ("Medium", about 60px) and the
+    // cell padding set the width.
+    &.severityNumber {
       flex-grow: 0;
-      flex-basis: 368px;
-      min-width: 368px;
+      flex-basis: 80px;
+      min-width: 80px;
+      justify-content: flex-end;
+      text-align: right;
     }
 
     &.clears {

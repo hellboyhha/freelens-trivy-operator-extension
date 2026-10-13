@@ -2,10 +2,11 @@
 // lists use. Plain elements and theme variables only, so they look right in any Freelens theme.
 
 import React from "react";
-import { type SeverityCounts, totalCount } from "../api/trivy/report-model";
 import { TrivyIcon } from "../icons";
 import styles from "./ui.module.scss";
 import stylesInline from "./ui.module.scss?inline";
+
+import type { SeverityCounts } from "../api/trivy/report-model";
 
 /** Render once per page or drawer so the classes exist. */
 export function UiStyles() {
@@ -44,29 +45,22 @@ export function SeverityBar({ counts }: { counts: SeverityCounts }) {
   );
 }
 
-/**
- * The severity of one report in a table cell: a thin proportional bar and the four counts in the
- * order critical, high, medium, low. Only critical and high are coloured; zeros are faint.
- */
-export function SeverityCell({ counts }: { counts: SeverityCounts }) {
-  const keys = ["critical", "high", "medium", "low"] as const;
-  if (totalCount(counts) === 0) return <span className={styles.muted}>no findings</span>;
-  const label = [
-    ...keys.map((key) => `${counts[key]} ${key}`),
-    ...(counts.unknown > 0 ? [`${counts.unknown} unknown`] : []),
-  ].join(", ");
+/** One severity count in its own column: critical and high are coloured, a zero is faint. */
+export function SeverityNumber({
+  counts,
+  severity,
+}: {
+  counts: SeverityCounts;
+  severity: "critical" | "high" | "medium" | "low";
+}) {
+  const value = counts[severity];
   return (
-    <div className={styles.sevCell} aria-label={label} title={label}>
-      <SeverityBar counts={counts} />
-      <span className={styles.sevNumbers}>
-        {keys.map((key) => (
-          <span key={key} className={cx(styles.sevNum, counts[key] === 0 ? styles.sevZero : styles[`sevNum_${key}`])}>
-            {counts[key]}
-          </span>
-        ))}
-        {counts.unknown > 0 ? <span className={styles.sevUnknown}>+{counts.unknown} unknown</span> : null}
-      </span>
-    </div>
+    <span
+      className={cx(styles.sevNum, value === 0 ? styles.sevZero : styles[`sevNum_${severity}`])}
+      aria-label={`${value} ${severity}`}
+    >
+      {value}
+    </span>
   );
 }
 

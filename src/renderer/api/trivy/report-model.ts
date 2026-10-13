@@ -34,6 +34,22 @@ export function severityWeight(counts: SeverityCounts): number {
   return cap(counts.critical) * 1e12 + cap(counts.high) * 1e8 + cap(counts.medium) * 1e4 + cap(counts.low) + unknown;
 }
 
+/**
+ * One number to sort a single severity column by: that column's own count decides, and reports with the
+ * same count are ordered by the overall severity, worst first. The column's count is capped at 9,999 and
+ * the tie-breakers at 99, which keeps the number an exact integer.
+ */
+export function severitySortKey(counts: SeverityCounts, primary: Exclude<SeverityKey, "unknown">): number {
+  const band = (n: number) => Math.min(n, 99);
+  return (
+    Math.min(counts[primary], 9999) * 1e8 +
+    band(counts.critical) * 1e6 +
+    band(counts.high) * 1e4 +
+    band(counts.medium) * 1e2 +
+    band(counts.low)
+  );
+}
+
 export function addCounts(a: SeverityCounts, b: SeverityCounts): SeverityCounts {
   return {
     critical: a.critical + b.critical,

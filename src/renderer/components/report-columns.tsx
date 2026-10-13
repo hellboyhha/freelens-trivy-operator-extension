@@ -7,7 +7,7 @@ import {
   resourceLabel,
   resourceOf,
   severityCounts,
-  severityWeight,
+  severitySortKey,
   sortedSecrets,
   totalCount,
   versionKey,
@@ -15,7 +15,7 @@ import {
 } from "../api/trivy/report-model";
 import { formatAge } from "./format";
 import styles from "./report-list.module.scss";
-import { Fixable, ImageName, Muted, SeverityCell, TwoLine } from "./ui";
+import { Fixable, ImageName, Muted, SeverityNumber, TwoLine } from "./ui";
 
 import type {
   Artifact,
@@ -104,15 +104,22 @@ export function imageColumn<T extends ReportObject>(): Column<T> {
   };
 }
 
-/** One column with the bar and the four counts; sorts the worst reports first. */
-export function severityColumn<T>(summaryOf: (object: T) => SeveritySummary | undefined): Column<T> {
-  return {
-    id: "severity",
-    title: "Severity",
-    className: styles.severityCell,
-    sort: (o) => severityWeight(severityCounts(summaryOf(o))),
-    render: (o) => <SeverityCell counts={severityCounts(summaryOf(o))} />,
-  };
+const SEVERITY_COLUMNS = [
+  { id: "critical", title: "Critical" },
+  { id: "high", title: "High" },
+  { id: "medium", title: "Medium" },
+  { id: "low", title: "Low" },
+] as const;
+
+/** Critical, High, Medium and Low as four sortable columns; each sorts by its own count. */
+export function severityColumns<T>(summaryOf: (object: T) => SeveritySummary | undefined): Column<T>[] {
+  return SEVERITY_COLUMNS.map(({ id, title }) => ({
+    id,
+    title,
+    className: styles.severityNumber,
+    sort: (o: T) => severitySortKey(severityCounts(summaryOf(o)), id),
+    render: (o: T) => <SeverityNumber counts={severityCounts(summaryOf(o))} severity={id} />,
+  }));
 }
 
 /** When the operator last scanned the object, as an age. */

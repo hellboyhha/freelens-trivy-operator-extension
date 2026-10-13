@@ -41,7 +41,7 @@ import {
   Muted,
   PassFailBar,
   SeverityBar,
-  SeverityCell,
+  SeverityNumber,
   Skeleton,
   TwoLine,
   UiStyles,
@@ -312,7 +312,10 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
                       <TableHead flat sticky={false}>
                         <TableCell className={styles.workload}>Workload</TableCell>
                         <TableCell className={styles.image}>Image</TableCell>
-                        <TableCell className={styles.severity}>Severity</TableCell>
+                        <TableCell className={styles.severityNumber}>Critical</TableCell>
+                        <TableCell className={styles.severityNumber}>High</TableCell>
+                        <TableCell className={styles.severityNumber}>Medium</TableCell>
+                        <TableCell className={styles.severityNumber}>Low</TableCell>
                         <TableCell className={styles.clears}>Upgrade clears</TableCell>
                       </TableHead>
                       {rows.map(({ item, counts, fixable, total }) => {
@@ -334,9 +337,11 @@ export const OverviewPage = observer((props: OverviewPageProps) =>
                                 title={item.report?.artifact?.digest}
                               />
                             </TableCell>
-                            <TableCell className={styles.severity}>
-                              <SeverityCell counts={counts} />
-                            </TableCell>
+                            {(["critical", "high", "medium", "low"] as const).map((severity) => (
+                              <TableCell key={severity} className={styles.severityNumber}>
+                                <SeverityNumber counts={counts} severity={severity} />
+                              </TableCell>
+                            ))}
                             <TableCell className={styles.clears}>
                               {fixable > 0 ? <Fixable>{`${fixable} of ${total}`}</Fixable> : <Muted>no fix yet</Muted>}
                             </TableCell>

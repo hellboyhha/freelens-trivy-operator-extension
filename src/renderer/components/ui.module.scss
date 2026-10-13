@@ -285,31 +285,9 @@ $control-height: 30px;
   }
 }
 
-// The severity cell of a list row: bar on the left, four right-aligned numbers beside it.
-.sevCell {
-  display: flex;
-  align-items: center;
-  gap: calc($unit * 1.5);
-  min-width: 0;
-
-  .bar {
-    flex: none;
-    width: 140px;
-    height: 7px;
-  }
-}
-
-.sevNumbers {
-  display: inline-flex;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-// Fixed-width digits so the four columns of numbers line up from row to row.
+// One severity count in its own column; the column right-aligns it.
 .sevNum {
-  min-width: 3ch;
   color: var(--textColorSecondary);
-  text-align: right;
 }
 
 .sevNum_critical {
@@ -325,10 +303,4 @@ $control-height: 30px;
 .sevZero {
   color: var(--textColorTertiary);
   opacity: 0.55;
-}
-
-// Findings the scanner could not rate: counted, but not part of the four columns.
-.sevUnknown {
-  color: var(--textColorTertiary);
-  font-size: var(--font-size-small);
 }

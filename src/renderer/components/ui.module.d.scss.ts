@@ -30,12 +30,9 @@ declare const classNames: {
   readonly fixable: "fixable";
   readonly muted: "muted";
   readonly skeleton: "skeleton";
-  readonly sevCell: "sevCell";
-  readonly sevNumbers: "sevNumbers";
   readonly sevNum: "sevNum";
   readonly sevNumCritical: "sevNumCritical";
   readonly sevNumHigh: "sevNumHigh";
   readonly sevZero: "sevZero";
-  readonly sevUnknown: "sevUnknown";
 };
 export = classNames;

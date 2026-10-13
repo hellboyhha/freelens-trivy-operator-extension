@@ -25,11 +25,15 @@
       flex-grow: 2.4;
     }
 
-    // Bar (140px) + four numbers + the unknown count ("+103 unknown"): 349px of content and 16px of padding.
-    &.severityCell {
+    // Critical, High, Medium and Low, one column each. "Medium" is the widest header (about 60px), and the sort
+    // arrow Freelens draws over the cell's right 34px needs room, so header and numbers share 36px of padding.
+    &.severityNumber {
       flex-grow: 0;
-      flex-basis: 368px;
-      min-width: 368px;
+      flex-basis: 104px;
+      min-width: 104px;
+      padding-right: 36px;
+      justify-content: flex-end;
+      text-align: right;
     }
 
     // Text such as "CycloneDX 1.7": left-aligned, wide enough for the label and the sort arrow, and set

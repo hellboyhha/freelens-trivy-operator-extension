@@ -62,20 +62,19 @@ describe("list pages", () => {
     });
   }
 
-  it("shows one severity cell with all four counts, then fixable and scanned", () => {
+  it("shows Critical, High, Medium and Low as their own columns, then fixable and scanned", () => {
     stockStores("vulnerabilityreport");
     const Page = LISTS.vulnerabilityreport as any;
     render(<Page extension={extension} />);
     const headers = within(screen.getByTestId("header"))
       .getAllByText(/.+/)
       .map((h) => h.textContent);
-    expect(headers).toEqual(["Workload", "Image", "Severity", "Fixable", "Scanned"]);
+    expect(headers).toEqual(["Workload", "Image", "Critical", "High", "Medium", "Low", "Fixable", "Scanned"]);
     const cells = screen.getAllByTestId("cell");
-    expect(cells[2].querySelector("[aria-label]")?.getAttribute("aria-label")).toBe(
-      "1 critical, 1 high, 0 medium, 1 low",
-    );
-    expect(cells[3].textContent).toBe("2");
-    expect(cells[4].textContent).toMatch(/ago$/);
+    expect(cells.slice(2, 6).map((c) => c.textContent)).toEqual(["1", "1", "0", "1"]);
+    expect(cells[2].querySelector("[aria-label]")?.getAttribute("aria-label")).toBe("1 critical");
+    expect(cells[6].textContent).toBe("2");
+    expect(cells[7].textContent).toMatch(/ago$/);
   });
 
   it("leaves the host header's title and item count out, since the page already says where you are", () => {
@@ -87,7 +86,7 @@ describe("list pages", () => {
     expect(host).not.toContain("host info");
   });
 
-  it("shows a report with only unknown-severity findings instead of calling it clean", () => {
+  it("keeps a report with only unknown-severity findings in the list, and shows no unknown label", () => {
     const kind = Kind("vulnerabilityreport");
     const base = fixture("vulnerabilityreport");
     const unknownOnly = new kind({
@@ -104,7 +103,8 @@ describe("list pages", () => {
     const Page = LISTS.vulnerabilityreport as any;
     const { container } = render(<Page extension={extension} />);
     expect(container.textContent).not.toContain("no findings");
-    expect(container.querySelector('[aria-label="0 critical, 0 high, 0 medium, 0 low, 20 unknown"]')).not.toBeNull();
+    expect(container.textContent).not.toContain("unknown");
+    expect(screen.getAllByTestId("row")).toHaveLength(1);
   });
 
   it("names the worst failed check of a checks report", () => {
@@ -243,7 +243,7 @@ describe("filter chips", () => {
   it("opens sorted by severity, worst first", () => {
     stockMixed();
     const { container } = render(<List extension={extension} />);
-    expect(container.querySelector('[data-sort="severity"]')).not.toBeNull();
+    expect(container.querySelector('[data-sort="critical"]')).not.toBeNull();
   });
 
   it("secrets open with Hide Clean already on", () => {
@@ -554,12 +554,14 @@ describe("Overview", () => {
     expect(one.container.textContent).toContain("1 has a fix");
   });
 
-  it("shows the Fix first table with the severity cell and no abbreviations", () => {
+  it("shows the Fix first table with a column per severity and no abbreviations", () => {
     stockStores("vulnerabilityreport");
     const { container } = render(<OverviewPage extension={extension} />);
-    expect(container.textContent).toContain("Severity");
-    expect(container.textContent).not.toContain("Crit");
-    expect(container.querySelector('[aria-label="1 critical, 1 high, 0 medium, 1 low"]')).not.toBeNull();
+    const text = container.textContent ?? "";
+    for (const head of ["Critical", "High", "Medium", "Low"]) expect(text).toContain(head);
+    expect(text).not.toContain("Severity");
+    expect(text).not.toContain("Crit ");
+    expect(container.querySelector('[aria-label="1 critical"]')).not.toBeNull();
   });
 
   it("says how many sources a tile lacks when only some are available", () => {
