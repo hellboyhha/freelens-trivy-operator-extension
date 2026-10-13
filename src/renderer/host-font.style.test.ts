@@ -78,6 +78,11 @@ describe("the extension's stylesheets follow the Freelens font", () => {
       ).toEqual([]);
     }
   });
+
+  it("leaves the table header to Freelens, so every list's header looks like the host's own", () => {
+    const restyled = styles.filter((file) => /TableHead/.test(readFileSync(file, "utf8")));
+    expect(restyled.map((file) => file.slice(root.length))).toEqual([]);
+  });
 });
 
 describe("the components do not style type inline", () => {

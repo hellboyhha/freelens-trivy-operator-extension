@@ -12,12 +12,6 @@
     }
   }
 
-  // Column headers: small, muted capitals.
-  :global(.TableHead) :global(.TableCell) {
-    color: var(--textColorSecondary);
-    font-size: var(--font-size-small);
-  }
-
   :global(.TableCell) {
     &.workload {
       flex-grow: 2;
