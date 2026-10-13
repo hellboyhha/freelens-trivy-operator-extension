@@ -45,6 +45,13 @@ export function SeverityBar({ counts }: { counts: SeverityCounts }) {
   );
 }
 
+const SEVERITY_NUMBER_CLASS = {
+  critical: styles.sevNumCritical,
+  high: styles.sevNumHigh,
+  medium: undefined,
+  low: undefined,
+} as const;
+
 /** One severity count in its own column: critical and high are coloured, a zero is faint. */
 export function SeverityNumber({
   counts,
@@ -56,7 +63,7 @@ export function SeverityNumber({
   const value = counts[severity];
   return (
     <span
-      className={cx(styles.sevNum, value === 0 ? styles.sevZero : styles[`sevNum_${severity}`])}
+      className={cx(styles.sevNum, value === 0 ? styles.sevZero : SEVERITY_NUMBER_CLASS[severity])}
       aria-label={`${value} ${severity}`}
     >
       {value}
