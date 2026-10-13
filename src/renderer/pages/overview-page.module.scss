@@ -27,12 +27,11 @@
 .lead {
   margin: calc($unit * -1.5) 0 0;
   color: var(--textColorSecondary);
-  font-size: 1.15em;
-  line-height: 1.5;
+  font-size: var(--font-size-big);
 
   b {
     color: var(--textColorPrimary);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   .critical {
@@ -65,35 +64,32 @@
 
 .tileLabel {
   color: var(--textColorSecondary);
-  font-size: 0.85em;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: var(--font-size-small);
 }
 
 .tileValue {
   margin: 2px 0 calc($unit * 1.25);
-  font-size: 2.1em;
-  font-weight: 600;
-  line-height: 1.15;
+  font-size: calc(var(--font-size) * 2.1);
+  font-weight: var(--font-weight-semibold);
 }
 
 .tileNA {
   color: var(--textColorTertiary);
-  font-size: 0.6em;
-  font-weight: 500;
+  font-size: var(--font-size-big);
+  font-weight: var(--font-weight-medium);
 }
 
 .tileUnit {
   margin-left: $unit;
   color: var(--textColorSecondary);
-  font-size: 0.45em;
-  font-weight: 400;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
 }
 
 .tileNote {
   margin-top: $unit;
   color: var(--textColorTertiary);
-  font-size: 0.9em;
+  font-size: var(--font-size-small);
 }
 
 .columns {
@@ -115,10 +111,8 @@
 .sectionTitle {
   margin: 0;
   color: var(--textColorSecondary);
-  font-size: 0.85em;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
 }
 
 .table {

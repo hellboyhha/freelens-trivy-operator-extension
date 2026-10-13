@@ -41,11 +41,11 @@
   gap: calc($unit * 1.5);
   margin-top: $unit;
   color: var(--textColorSecondary);
-  font-size: 0.9em;
+  font-size: var(--font-size-small);
 
   b {
     color: var(--textColorPrimary);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 }
 
@@ -100,7 +100,6 @@ $control-height: 30px;
   border: 1px solid color-mix(in srgb, var(--colorWarning) 40%, transparent);
   border-radius: $unit;
   background: color-mix(in srgb, var(--colorWarning) 10%, transparent);
-  line-height: 1.5;
 }
 
 .bannerInfo {
@@ -156,7 +155,7 @@ $control-height: 30px;
 .tabOn {
   border-color: var(--textColorAccent);
   color: var(--textColorPrimary);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .empty {
@@ -164,13 +163,12 @@ $control-height: 30px;
   margin: calc($unit * 8) auto 0;
   text-align: center;
   color: var(--textColorSecondary);
-  line-height: 1.55;
 
   h5 {
     margin: 0 0 calc($unit * 1.5);
     color: var(--textColorPrimary);
-    font-size: 1.15em;
-    font-weight: 600;
+    font-size: var(--font-size-big);
+    font-weight: var(--font-weight-semibold);
   }
 }
 
@@ -204,8 +202,6 @@ $control-height: 30px;
   border: 1px solid var(--borderColor);
   border-radius: 6px;
   background: var(--contentColor);
-  font-family: var(--font-monospace, monospace);
-  font-size: 0.9em;
   text-align: left;
   user-select: text;
   white-space: pre-wrap;
@@ -229,7 +225,7 @@ $control-height: 30px;
   border-color: var(--primary);
   background: var(--primary);
   color: #fff;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 
   &:hover {
     border-color: var(--primary);
@@ -246,8 +242,7 @@ $control-height: 30px;
 
   b {
     overflow: hidden;
-    font-weight: 600;
-    line-height: 1.35;
+    font-weight: var(--font-weight-semibold);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -255,17 +250,13 @@ $control-height: 30px;
   span {
     overflow: hidden;
     color: var(--textColorTertiary);
-    font-size: 0.88em;
-    line-height: 1.35;
+    font-size: var(--font-size-small);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 }
 
 .image {
-  font-family: var(--font-monospace, monospace);
-  font-size: 0.9em;
-
   em {
     color: var(--textColorAccent);
     font-style: normal;
@@ -274,7 +265,7 @@ $control-height: 30px;
 
 .fixable {
   color: var(--colorOk, #4caf50);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .muted {
@@ -318,18 +309,17 @@ $control-height: 30px;
 .sevNum {
   min-width: 3ch;
   color: var(--textColorSecondary);
-  font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
 .sevNum_critical {
   color: var(--colorError);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .sevNum_high {
   color: var(--colorWarning);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .sevZero {
@@ -340,5 +330,5 @@ $control-height: 30px;
 // Findings the scanner could not rate: counted, but not part of the four columns.
 .sevUnknown {
   color: var(--textColorTertiary);
-  font-size: 0.9em;
+  font-size: var(--font-size-small);
 }

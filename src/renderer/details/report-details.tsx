@@ -125,7 +125,7 @@ function Meta({ object, report }: { object: any; report?: any }) {
       {report?.registry?.server ? <DrawerItem name="Registry">{report.registry.server}</DrawerItem> : null}
       {report?.artifact?.digest ? (
         <DrawerItem name="Digest">
-          <span className={styles.mono}>{report.artifact.digest}</span>
+          <span className={styles.digest}>{report.artifact.digest}</span>
         </DrawerItem>
       ) : null}
       {os ? <DrawerItem name="OS">{report?.os?.eosl ? `${os} (end of support life)` : os}</DrawerItem> : null}

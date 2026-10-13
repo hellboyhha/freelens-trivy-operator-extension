@@ -34,8 +34,7 @@
   }
 }
 
-.mono {
-  font-family: var(--font-monospace, monospace);
+.digest {
   user-select: text;
   word-break: break-all;
 }
@@ -60,14 +59,13 @@
   }
 
   b {
-    font-size: 1.6em;
-    font-weight: 600;
-    line-height: 1.2;
+    font-size: calc(var(--font-size) * 1.6);
+    font-weight: var(--font-weight-semibold);
   }
 
   span {
     color: var(--textColorSecondary);
-    font-size: 0.85em;
+    font-size: var(--font-size-small);
   }
 }
 
@@ -130,20 +128,18 @@
   gap: $unit calc($unit * 1.25);
 
   b {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 }
 
 .versions {
   color: var(--textColorTertiary);
-  font-family: var(--font-monospace, monospace);
-  font-size: 0.9em;
 }
 
 .clears {
   margin-left: auto;
   color: var(--colorOk, #4caf50);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .nofix {
@@ -155,7 +151,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  font-size: 0.85em;
+  font-size: var(--font-size-small);
 
   a,
   span {
@@ -163,7 +159,6 @@
     border-radius: 4px;
     background: color-mix(in srgb, var(--textColorSecondary) 12%, transparent);
     color: var(--textColorSecondary);
-    font-family: var(--font-monospace, monospace);
     text-decoration: none;
   }
 
@@ -189,7 +184,7 @@
 }
 
 .checkTitle {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .checkBody {
@@ -198,7 +193,6 @@
   gap: 6px;
   margin-top: $unit;
   color: var(--textColorSecondary);
-  line-height: 1.45;
 }
 
 .fixLine {
@@ -241,5 +235,4 @@
   gap: calc($unit * 2);
   margin-top: 6px;
   color: var(--textColorSecondary);
-  font-size: 0.95em;
 }

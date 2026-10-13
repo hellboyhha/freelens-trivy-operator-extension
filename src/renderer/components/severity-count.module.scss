@@ -4,16 +4,14 @@
   min-width: 26px;
   padding: 1px 8px;
   border-radius: 10px;
-  font-size: 0.85em;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
   text-align: center;
-  font-variant-numeric: tabular-nums;
 }
 
 .zero {
   color: var(--textColorTertiary);
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 }
 
 .critical {

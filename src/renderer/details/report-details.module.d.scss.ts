@@ -8,7 +8,7 @@ declare const classNames: {
   readonly title: "title";
   readonly count: "count";
   readonly name: "name";
-  readonly mono: "mono";
+  readonly digest: "digest";
   readonly summary: "summary";
   readonly big: "big";
   readonly bigRight: "bigRight";

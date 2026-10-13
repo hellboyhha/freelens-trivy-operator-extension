@@ -37,28 +37,27 @@
 }
 
 .cardTitle {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .cardFailing {
-  font-size: 1.7em;
-  font-weight: 600;
-  line-height: 1.1;
+  font-size: calc(var(--font-size) * 1.7);
+  font-weight: var(--font-weight-semibold);
   color: var(--colorError);
 }
 
 .cardUnit {
   margin-left: 6px;
   color: var(--textColorSecondary);
-  font-size: 0.5em;
-  font-weight: 400;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
 }
 
 .cardMeta {
   display: flex;
   justify-content: space-between;
   color: var(--textColorSecondary);
-  font-size: 0.9em;
+  font-size: var(--font-size-small);
 }
 
 .tools {
