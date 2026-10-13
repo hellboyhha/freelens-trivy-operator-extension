@@ -186,7 +186,7 @@ export function numberColumn<T>(id: string, title: string, valueOf: (object: T) 
   return {
     id,
     title,
-    className: styles.number,
+    className: `${styles.number} ${styles.count}`,
     sort: (o) => valueOf(o) ?? 0,
     render: (o) => valueOf(o) ?? "N/A",
   };

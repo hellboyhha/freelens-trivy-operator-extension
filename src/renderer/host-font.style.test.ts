@@ -85,14 +85,20 @@ describe("the extension's stylesheets follow the Freelens font", () => {
   });
 
   it("keeps number columns wide enough for their header and the sort arrow at the host's size", () => {
-    // Measured in the running app: "Dependencies" is 88px of text, and Freelens draws the sort arrow over the
-    // cell's right 34px (24px icon, 10px from the edge). A right-aligned header needs both, or the arrow sits
-    // on top of the last letters. The host avoids this by left-aligning its own sorted number columns.
+    // Measured in the running app: "Dependencies" is 88px of text, "Scanned" 54px, and Freelens draws the sort
+    // arrow over the cell's right 34px (24px icon, 10px from the edge). A right-aligned header needs both, or
+    // the arrow sits on top of the last letters. The host avoids this by left-aligning its sorted number columns.
     const list = readFileSync(join(root, "components/report-list.module.scss"), "utf8");
-    const rule = /&\.number\s*\{([^}]*)\}/.exec(list)?.[1] ?? "";
-    const px = (property: string) => Number(new RegExp(`${property}:\\s*(\\d+)px`).exec(rule)?.[1] ?? 0);
-    expect(px("padding-right")).toBeGreaterThanOrEqual(34);
-    expect(px("min-width")).toBeGreaterThanOrEqual(88 + px("padding-right") + 8);
+    const rule = (name: string) => new RegExp(`&\\.${name}\\s*\\{([^}]*)\\}`).exec(list)?.[1] ?? "";
+    const px = (body: string, property: string) => Number(new RegExp(`${property}:\\s*(\\d+)px`).exec(body)?.[1] ?? 0);
+
+    const number = rule("number");
+    expect(px(number, "padding-right")).toBeGreaterThanOrEqual(34);
+    expect(px(number, "min-width")).toBeGreaterThanOrEqual(54 + px(number, "padding-right") + 8);
+
+    // The counts (SBOM components and dependencies) have the longest headers.
+    const count = rule("count");
+    expect(px(count, "min-width")).toBeGreaterThanOrEqual(88 + px(number, "padding-right") + 8);
   });
 });
 
