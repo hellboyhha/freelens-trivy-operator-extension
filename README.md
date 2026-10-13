@@ -22,8 +22,8 @@ One **Trivy Operator** entry in the cluster sidebar with six pages:
 
 | Page | What it shows |
 |---|---|
-| **Overview** | A one-sentence headline, four tiles (vulnerabilities, exposed secrets, misconfigurations, compliance), the images where an upgrade pays off most, and where each compliance benchmark stands. |
-| **Vulnerabilities** | One row per workload container, with a severity bar, the number of findings an upgrade fixes, and the scan age. Switch between namespaced and cluster-scoped reports. |
+| **Overview** | A one-sentence headline, four tiles (vulnerabilities, exposed secrets, misconfigurations, compliance), the images where an upgrade pays off most, and a table of where each compliance benchmark stands. |
+| **Vulnerabilities** | One row per workload container, with its Critical, High, Medium and Low counts (each column sorts on its own), the number of findings an upgrade fixes, and the scan age. Switch between namespaced and cluster-scoped reports. |
 | **Misconfigurations** | Config audit, RBAC and infrastructure checks in three tabs. |
 | **Secrets** | Secrets found inside images, by rule and file. The matched text is never shown. |
 | **SBOM** | Software bills of materials. Loaded on request because they are large. Find a package by name, version or purl and see every workload that contains it. |
